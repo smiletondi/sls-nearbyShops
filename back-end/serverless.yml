@@ -1,0 +1,64 @@
+# Serverless
+service: nearbyShops
+# app and org for use with dashboard.serverless.com
+app: sls-nearbyshops
+org: smiletondi
+
+# You can pin your service to only deploy with a specific Serverless version
+# Check out our docs for more details
+# frameworkVersion: "=X.X.X"
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  stage: dev
+  region: eu-west-3
+  profile: serverless
+
+functions:
+  api:
+    handler: app.handler
+    events:
+      - http:
+          path: /
+          method: get
+          cors: true
+          # private: true
+      - http:
+          path: /signin
+          method: post
+          cors: true
+          # private: true
+      - http:
+          path: /signup
+          method: post
+          cors: true
+          # private: true
+      - http:
+          path: /shops/preferredShops
+          method: get
+          cors: true
+          # private: true
+      - http:
+          path: /shops/nearbyShops
+          method: get
+          cors: true
+          # private: true
+      - http:
+          path: /shops/{id}/like
+          method: post
+          cors: true
+          # private: true
+      - http:
+          path: /shops/{id}/dislike
+          method: post
+          cors: true
+          # private: true
+      - http:
+          path: /shops/{id}/remove
+          method: delete
+          cors: true
+          # private: true
+
+plugins:
+  - serverless-offline
